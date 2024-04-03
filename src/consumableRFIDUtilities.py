@@ -2,24 +2,17 @@ import binascii
 import time
 import zlib
 
+from src.settings import settings
+
 
 class ConsumableRFIDUtilities:
-    SEPARATOR_CHAR = ","
-    INSTALL_SEPARATOR = "/"
-    CHECKSUM_SEPARATOR = "#"
-    UID_TAGINFO_SEPARATOR = "::"
-    DATE_DIVISOR = 60000
-    MILLISECOND_IN_A_DAY = 86400000
-    MAX_RFID_SIZE = 256
-    SECRET_CHECKSUM_STRING = "#rF1d*d2Ta&"
-    ORIGINAL_SECRET_CHECKSUM_STRING = "&rFId*dAtA%"
 
     def __init__(self):
-        pass
+        ...
 
     @staticmethod
     def _calculate_v1_0_checksum(
-        tag_uid: str, str_start_code: str, blob: str
+            tag_uid: str, str_start_code: str, blob: str
     ) -> str:
         checksum = 0
 
@@ -41,7 +34,7 @@ class ConsumableRFIDUtilities:
             if tag_uid is None
             else ConsumableRFIDUtilities.calculate_checksum(
                 tag_uid,
-                ConsumableRFIDUtilities.SECRET_CHECKSUM_STRING,
+                settings.SECRET_CHECKSUM_STRING,
                 blob,
             )
         )
@@ -56,21 +49,21 @@ class ConsumableRFIDUtilities:
     @staticmethod
     def _remove_checksum(blob: str) -> str:
         pieces: list[str] = blob.split(
-            ConsumableRFIDUtilities.CHECKSUM_SEPARATOR
+            settings.CHECKSUM_SEPARATOR
         )
         return pieces[0]
 
     @staticmethod
     def check_checksum(tag_uid: str, blob: str) -> bool:
         pieces: list[str] = blob.split(
-            ConsumableRFIDUtilities.CHECKSUM_SEPARATOR
+            settings.CHECKSUM_SEPARATOR
         )
         test_checksum: str = (
             ConsumableRFIDUtilities.calculate_checksum(pieces[0])
             if tag_uid is None
             else ConsumableRFIDUtilities.calculate_checksum(
                 tag_uid,
-                ConsumableRFIDUtilities.SECRET_CHECKSUM_STRING,
+                settings.SECRET_CHECKSUM_STRING,
                 pieces[0],
             )
         )
@@ -85,14 +78,14 @@ class ConsumableRFIDUtilities:
     @staticmethod
     def check_v1_0_checksum(tag_uid: str, blob: str) -> bool:
         pieces: list[str] = blob.split(
-            ConsumableRFIDUtilities.CHECKSUM_SEPARATOR
+            settings.CHECKSUM_SEPARATOR
         )
         test_checksum: str = (
             ConsumableRFIDUtilities._calculate_v1_0_checksum(pieces[0])
             if tag_uid is None
             else ConsumableRFIDUtilities._calculate_v1_0_checksum(
                 tag_uid,
-                ConsumableRFIDUtilities.ORIGINAL_SECRET_CHECKSUM_STRING,
+                settings.ORIGINAL_SECRET_CHECKSUM_STRING,
                 pieces[0],
             )
         )
