@@ -1,5 +1,6 @@
 # from Crypto.Hash import HMAC, MD2, MD4, MD5, RIPEMD, SHA, SHA224, SHA256, SHA384, SHA512
 import base64
+
 # from Crypto.PublicKey import
 
 
@@ -31,5 +32,5 @@ def main():
     print(base64.standard_b64decode(clear_data.encode()))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
