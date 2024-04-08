@@ -16,6 +16,20 @@ class ConsumableRFIDUtilities:
         while len(current_str) < 4:
             current_str = "0" + current_str
         return current_str
+    
+    @staticmethod
+    def _convert_base(num, to_base=10, from_base=10):
+        # first convert to decimal number
+        if isinstance(num, str):
+            n = int(num, from_base)
+        else:
+            n = int(num)
+        # now convert decimal to 'to_base' base
+        alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
+        if n < to_base:
+            return alphabet[n]
+        else:
+            return ConsumableRFIDUtilities._convert_base(n // to_base, to_base) + alphabet[n % to_base]
 
     # ANODE BUFFER FUNCTIONS
     @staticmethod
@@ -36,9 +50,9 @@ class ConsumableRFIDUtilities:
         blob = blob + buffer_type + ","
         blob = blob + part_num + ","
         blob = blob + lot_num + ","
-        blob = blob + str(expiration_date / 1000) + ","
-        blob = blob + str(installation_date / 1000) + ","
-        blob = blob + str(life_on_instrument / 1000) + ","
+        blob = blob + str(expiration_date / 60) + ","
+        blob = blob + str(installation_date / 60) + ","
+        blob = blob + str(life_on_instrument / 60) + ","
 
         runs_allowed = ConsumableRFIDUtilities._format_number_to_4_digit_str(runs_allowed)
         blob = blob + runs_allowed
@@ -147,12 +161,12 @@ class ConsumableRFIDUtilities:
         return loi
 
     @staticmethod
-    def set_anode_buffer_life_on_instrument_in_blob(tag_uid: str, blob: str, loi: int) -> str:
-        blob = ConsumableRFIDUtilities._remove_checksum(blob)
+    def set_anode_buffer_life_on_instrument_in_blob(cls, tag_uid: str, blob: str, loi: int) -> str:
+        blob = cls._remove_checksum(blob)
         pieces = blob.split(settings.SEPARATOR_CHAR)
         pieces[5] = str(loi / 60000)
         blob = settings.SEPARATOR_CHAR.join(blob)
-        blob = ConsumableRFIDUtilities.add_checksum(tag_uid, blob)
+        blob = cls.add_checksum(tag_uid, blob)
         return blob
 
     @staticmethod
@@ -167,14 +181,14 @@ class ConsumableRFIDUtilities:
         return allowed_runs
 
     @staticmethod
-    def set_anode_buffer_allowed_runs_ib_blob(tag_uid: str, blob: str, allowed_runs: int) -> str:
-        blob = ConsumableRFIDUtilities._remove_checksum(blob)
+    def set_anode_buffer_allowed_runs_ib_blob(cls, tag_uid: str, blob: str, allowed_runs: int) -> str:
+        blob = cls._remove_checksum(blob)
         allowed_runs = max(allowed_runs, 0)
         pieces: list[str] = blob.split(settings.SEPARATOR_CHAR)
-        current_str = ConsumableRFIDUtilities._format_number_to_4_digit_str(allowed_runs)
+        current_str = cls._format_number_to_4_digit_str(allowed_runs)
         pieces[6] = pieces[6][4:] + current_str
         blob = settings.SEPARATOR_CHAR.join(pieces)
-        blob = ConsumableRFIDUtilities.add_checksum(tag_uid, blob)
+        blob = cls.add_checksum(tag_uid, blob)
         return blob
 
     @staticmethod
@@ -189,8 +203,8 @@ class ConsumableRFIDUtilities:
         return remaining_runs
 
     @staticmethod
-    def set_anode_buffer_remaining_runs_in_blob(tag_uid: str, blob: str, remaining_runs: int) -> str:
-        blob = ConsumableRFIDUtilities._remove_checksum(blob)
+    def set_anode_buffer_remaining_runs_in_blob(cls, tag_uid: str, blob: str, remaining_runs: int) -> str:
+        blob = cls._remove_checksum(blob)
         remaining_runs = max(remaining_runs, 0)
         pieces: list[str] = blob.split(settings.SEPARATOR_CHAR)
 
@@ -200,7 +214,7 @@ class ConsumableRFIDUtilities:
 
         pieces[6] = pieces[6][:4] + current_str
         blob = settings.SEPARATOR_CHAR.join(pieces)
-        blob = ConsumableRFIDUtilities.add_checksum(tag_uid, blob)
+        blob = cls.add_checksum(tag_uid, blob)
         return blob
 
     #  CHECKSUM FUNCTIONS
@@ -230,12 +244,12 @@ class ConsumableRFIDUtilities:
         return pieces[0]
 
     @staticmethod
-    def check_checksum(blob: str, tag_uid: str = None) -> bool:
+    def check_checksum(cls, blob: str, tag_uid: str = None) -> bool:
         pieces: list[str] = blob.split(settings.CHECKSUM_SEPARATOR)
         test_checksum: str = (
-            ConsumableRFIDUtilities.calculate_checksum(pieces[0])
+            cls.calculate_checksum(pieces[0])
             if tag_uid is None
-            else ConsumableRFIDUtilities.calculate_checksum(
+            else cls.calculate_checksum(
                 tag_uid,
                 settings.SECRET_CHECKSUM_STRING,
                 pieces[0],
@@ -257,3 +271,7 @@ class ConsumableRFIDUtilities:
         else:
             timestamp = int(pieces[2], 36)
             return int(datetime.datetime.now().strftime("milliseconds")) >= timestamp
+
+    @classmethod
+    def calculate_checksum(cls, blob: str) -> str:
+        return cls._convert_base(binascii.crc32(blob.encode("utf-8")), 36, 10)
