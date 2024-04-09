@@ -11,8 +11,11 @@
 
 </head>
 <body>
-<h1 class="text-center">Генератор информации для записи в RFID для анодного буфера</h1>
-<div class="container p-5">
+<h1 class="text-center h1">Генератор информации для записи в RFID метку</h1>
+
+
+<div class="container p-3">
+    <h3 class="h3">Анодный буфер</h3>
     <div class="container d-flex mx-auto">
         <div class="container">
             <label for="Tag_UID" class="form-label">Tag UID</label>
@@ -49,6 +52,52 @@
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
                 <p id="abc_result" class="user-select-all card-text"></p>
+                <div class="container">
+                    <button class="btn btn-success btn-sm" onclick=copyToClipboard()>Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container p-3">
+    <h3 class="h3">Катодный буфер</h3>
+    <div class="container d-flex mx-auto">
+        <div class="container">
+            <label for="Tag_UID" class="form-label">Tag UID</label>
+            <input type="text" id="cbc_Tag_UID" class="form-control" aria-describedby="cbc_tagUidHelpBlock">
+            <div id="cbc_tagUidHelpBlock" class="form-text">
+                Например: E0:07:80:91:80:23:51:74
+            </div>
+        </div>
+        <div class="container">
+            <label for="part_num" class="form-label">Номер партии</label>
+            <input type="text" id="cbc_part_num" class="form-control" aria-describedby="cbc_partNumberHelpBlock">
+            <div id="cbc_partNumberHelpBlock" class="form-text">
+                Например: 3751713
+            </div>
+        </div>
+        <div class="container">
+            <label for="lot_num" class="form-label">Серийный номер</label>
+            <input type="text" id="cbc_lot_num" class="form-control" aria-describedby="cbc_lotNumberHelpBlock">
+            <div id="cbc_lotNumberHelpBlock" class="form-text">
+                Например: 0080623
+            </div>
+        </div>
+        <div class="container">
+            <label for="expiration_date" class="form-label">Срок годности</label>
+            <input type="date" id="cbc_expiration_date" class="form-control">
+            <div id="cbc_expirationDateHelpBlock" class="form-text">
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick=get_cathode_buffer_blob()>Generate data</button>
+    </div>
+    <div class="container p-4 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Данные для записи в RFID метку:</h5>
+                <p id="сbc_result" class="user-select-all card-text"></p>
                 <div class="container">
                     <button class="btn btn-success btn-sm" onclick=copyToClipboard()>Copy to Clipboard</button>
                 </div>
