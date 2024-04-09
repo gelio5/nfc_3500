@@ -36,10 +36,16 @@ class TestConsumableRFIDUtilities(unittest.TestCase):
             ),
             True,
         )
+
     def test_get_anode_buffer_part_number_from_blob(self):
-        self.assertEqual(ConsumableRFIDUtilities.get_anode_buffer_part_number_from_blob(ANODE_BUFFER_VALID_BLOB), "3751713")
-        self.assertEqual(ConsumableRFIDUtilities.get_anode_buffer_lot_number_from_blob(ANODE_BUFFER_VALID_BLOB), "0080623")
+        self.assertEqual(
+            ConsumableRFIDUtilities.get_anode_buffer_part_number_from_blob(ANODE_BUFFER_VALID_BLOB), "3751713"
+        )
+        self.assertEqual(
+            ConsumableRFIDUtilities.get_anode_buffer_lot_number_from_blob(ANODE_BUFFER_VALID_BLOB), "0080623"
+        )
         # self.assertNotEqual(ConsumableRFIDUtilities.get_anode_buffer_life_on_instrument_in_blob(ANODE_BUFFER_VALID_BLOB), 60000)
+
 
 # TODO: add real test cases for all functions which need to be written
 
