@@ -50,9 +50,9 @@ class ConsumableRFIDUtilities:
         blob = blob + buffer_type + ","
         blob = blob + part_num + ","
         blob = blob + lot_num + ","
-        blob = blob + str(expiration_date / 60) + ","
-        blob = blob + str(installation_date / 60) + ","
-        blob = blob + str(life_on_instrument / 60) + ","
+        blob = blob + str(int(expiration_date / 60)) + ","
+        blob = blob + str(int(installation_date / 60)) + ","
+        blob = blob + str(int(life_on_instrument / 60)) + ","
 
         runs_allowed = ConsumableRFIDUtilities._format_number_to_4_digit_str(runs_allowed)
         blob = blob + runs_allowed
