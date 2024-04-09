@@ -21,9 +21,9 @@ const get_blob = async (url = "", data = {}) => {
     return response.json(); // parses JSON response into native JavaScript objects
   }
 
-const copyToClipboard = async () => {
+const copyAnodeBlobToClipboard = async () => {
   try {
-    const element = document.querySelector(".user-select-all");
+    const element = document.getElementById("abc_result");
     await navigator.clipboard.writeText(element.textContent);
     // Optional: Provide feedback or perform additional actions upon successful copy
   } catch (error) {
@@ -32,6 +32,16 @@ const copyToClipboard = async () => {
   }
 };
 
+const copyCathodeBlobToClipboard = async () => {
+  try {
+    const element = document.getElementById("cbc_result");
+    await navigator.clipboard.writeText(element.textContent);
+    // Optional: Provide feedback or perform additional actions upon successful copy
+  } catch (error) {
+    console.error("Failed to copy to clipboard:", error);
+    // Optional: Handle and display the error to the user
+  }
+};
 
 const get_anode_buffer_blob = async () => {
     let tag_uid = document.getElementById('Tag_UID').value;
@@ -46,7 +56,9 @@ const get_anode_buffer_blob = async () => {
     }
     console.log(tag_info);
     let blob = await get_blob("/rfid/anode_buffer_blob", tag_info);
-    document.getElementById("abc_result").textContent = blob;
+    if (blob){
+        document.getElementById("ab_result").textContent = blob;
+    }
 };
 
 const get_cathode_buffer_blob = async () => {
@@ -62,6 +74,8 @@ const get_cathode_buffer_blob = async () => {
     }
     console.log(tag_info);
     let blob = await get_blob("/rfid/cathode_buffer_blob", tag_info);
-    document.getElementById("cbc_result").textContent = blob;
+    if (blob){
+        document.getElementById("cbc_result").textContent = blob;
+    }
 };
 
