@@ -51,9 +51,9 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
-                <p id="abc_result" class="user-select-all card-text"></p>
+                <p id="abc_result" class="card-text"></p>
                 <div class="container">
-                    <button class="btn btn-success btn-sm" onclick=copyAnodeBlobToClipboard()>Copy to Clipboard</button>
+                    <button class="btn btn-success btn-sm" onclick=CopyBlobToClipboard("abc_result")>Copy to Clipboard</button>
                 </div>
             </div>
         </div>
@@ -97,9 +97,9 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
-                <p id="cbc_result" class="user-select-all card-text"></p>
+                <p id="cbc_result" class="card-text"></p>
                 <div class="container">
-                    <button class="btn btn-success btn-sm" onclick=copyCathodeBlobToClipboard()>Copy to Clipboard</button>
+                    <button class="btn btn-success btn-sm" onclick=CopyBlobToClipboard("cbc_result")>Copy to Clipboard</button>
                 </div>
             </div>
         </div>

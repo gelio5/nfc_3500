@@ -2,46 +2,27 @@ const base_url = document.location.hostname + ":" + document.location.port
 
 
 const get_blob = async (url = "", data = {}) => {
-    // Default options are marked with *
     const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-    //   mode: "same-origin", // no-cors, *cors, same-origin
-    //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    //   credentials: "same-origin", // include, *same-origin, omit
+      method: "POST",
       headers: {
         "accept": "application/json",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      mode: "cors", // no-cors, *cors, same-origin
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      mode: "cors",
+      body: JSON.stringify(data),
     });
-    return response.json(); // parses JSON response into native JavaScript objects
+    return response.json();
   }
 
-const copyAnodeBlobToClipboard = async () => {
-  try {
-    const element = document.getElementById("abc_result");
-    await navigator.clipboard.writeText(element.textContent);
-    // Optional: Provide feedback or perform additional actions upon successful copy
-  } catch (error) {
-    console.error("Failed to copy to clipboard:", error);
-    // Optional: Handle and display the error to the user
-  }
-};
-
-const copyCathodeBlobToClipboard = async () => {
-  try {
-    const element = document.getElementById("cbc_result");
-    await navigator.clipboard.writeText(element.textContent);
-    // Optional: Provide feedback or perform additional actions upon successful copy
-  } catch (error) {
-    console.error("Failed to copy to clipboard:", error);
-    // Optional: Handle and display the error to the user
-  }
-};
+const CopyBlobToClipboard = async (source) => {
+    try {
+        source = document.getElementById(source);
+        await navigator.clipboard.writeText(source.textContent);
+    } catch (error) {
+        console.error("Failed to copy to clipboard:", error);
+    }}
 
 const get_anode_buffer_blob = async () => {
     let tag_uid = document.getElementById('Tag_UID').value;
