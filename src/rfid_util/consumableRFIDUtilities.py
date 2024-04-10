@@ -79,7 +79,8 @@ class ConsumableRFIDUtilities:
     @staticmethod
     def add_checksum(tag_uid: str, blob: str) -> str:
         checksum = ConsumableRFIDUtilities.calculate_checksum(tag_uid, settings.SECRET_CHECKSUM_STRING, blob)
-        timestamp = int(time.time())
+        timestamp = int(time.time() * 1000)
+        timestamp = ConsumableRFIDUtilities._convert_base(timestamp, 36, 10)
         blob = f"{blob}#{checksum}#{timestamp}#"
         return blob
 
