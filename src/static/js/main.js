@@ -57,7 +57,7 @@ const get_anode_buffer_blob = async () => {
     console.log(tag_info);
     let blob = await get_blob("/rfid/anode_buffer_blob", tag_info);
     if (blob){
-        document.getElementById("ab_result").textContent = blob;
+        document.getElementById("abc_result").textContent = blob;
     }
 };
 

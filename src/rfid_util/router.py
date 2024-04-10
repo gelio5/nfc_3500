@@ -34,7 +34,7 @@ def generate_anode_buffer_blob(tag_info: TagInfo):
 
 
 @rfid.post("/cathode_buffer_blob")
-def generate_anode_buffer_blob(tag_info: TagInfo):
+def generate_cathode_buffer_blob(tag_info: TagInfo):
     tag_uid = "".join(tag_info.tag_uid.split(":"))
     expiration_date = int(datetime.fromisoformat(tag_info.expiration_date.isoformat()).timestamp())
     blob = ConsumableRFIDUtilities.create_buffer_blob(
