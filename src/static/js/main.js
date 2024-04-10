@@ -60,3 +60,21 @@ const get_cathode_buffer_blob = async () => {
     }
 };
 
+const get_polymer_blob = async () => {
+    let polymer_type = document.getElementById('polymer_type').value;
+    let tag_uid = document.getElementById('pol_Tag_UID').value;
+    let part_num = document.getElementById('pol_part_num').value;
+    let lot_num = document.getElementById('pol_lot_num').value;
+    let expiration_date = document.getElementById('pol_expiration_date').value;
+    let tag_info = {
+    "polymer_type": polymer_type,
+    "tag_uid": tag_uid,
+    "part_number": part_num,
+    "lot_number": lot_num,
+    "expiration_date": expiration_date}
+    console.log(tag_info);
+    let blob = await get_blob("/rfid/polymer_blob", tag_info);
+    if (blob){
+        document.getElementById("pol_result").innerText = blob;
+    }
+};
