@@ -99,7 +99,7 @@ const get_conditioner_blob = async () => {
 };
 
 const saveBinary = (type) => {
-    let tag_uid = document.getElementById(type + '_Tag_UID').value.replace(":", "_");
+    let tag_uid = document.getElementById(type + '_Tag_UID').value.replace(" ", "_");
     let filename = tag_uid + "_blob.bin";
     let data = document.getElementById(type + '_result').innerText;
     encoder = new TextEncoder();
