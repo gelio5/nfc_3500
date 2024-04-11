@@ -10,7 +10,7 @@ rfid = APIRouter()
 
 
 class BufferTagInfo(BaseModel):
-    tag_uid: str = Field(pattern="[\\dA-F]{2}(:[\\dA-F]{2}){7}")
+    tag_uid: str = Field(pattern="[\\dA-F]{2}( [\\dA-F]{2}){7}")
     part_number: str
     lot_number: str
     expiration_date: date
@@ -18,7 +18,7 @@ class BufferTagInfo(BaseModel):
 
 class PolymerTagInfo(BaseModel):
     polymer_type: str = Field(pattern="POP[467]")
-    tag_uid: str = Field(pattern="[\\dA-F]{2}(:[\\dA-F]{2}){7}")
+    tag_uid: str = Field(pattern="[\\dA-F]{2}( [\\dA-F]{2}){7}")
     part_number: str
     lot_number: str
     expiration_date: date
@@ -26,7 +26,7 @@ class PolymerTagInfo(BaseModel):
 
 @rfid.post("/polymer_blob")
 async def generate_polymer_blob(tag_info: PolymerTagInfo):
-    tag_uid = "".join(tag_info.tag_uid.split(":"))
+    tag_uid = "".join(tag_info.tag_uid.split())
     expiration_date = int(datetime.fromisoformat(tag_info.expiration_date.isoformat()).timestamp())
     blob = ConsumableRFIDUtilities.create_polymer_blob(
         tag_uid=tag_uid,
@@ -49,7 +49,7 @@ async def generate_polymer_blob(tag_info: PolymerTagInfo):
 
 @rfid.post("/anode_buffer_blob")
 async def generate_anode_buffer_blob(tag_info: BufferTagInfo):
-    tag_uid = "".join(tag_info.tag_uid.split(":"))
+    tag_uid = "".join(tag_info.tag_uid.split())
     expiration_date = int(datetime.fromisoformat(tag_info.expiration_date.isoformat()).timestamp())
     blob = ConsumableRFIDUtilities.create_buffer_blob(
         tag_uid=tag_uid,
@@ -67,7 +67,7 @@ async def generate_anode_buffer_blob(tag_info: BufferTagInfo):
 
 @rfid.post("/cathode_buffer_blob")
 def generate_cathode_buffer_blob(tag_info: BufferTagInfo):
-    tag_uid = "".join(tag_info.tag_uid.split(":"))
+    tag_uid = "".join(tag_info.tag_uid.split())
     expiration_date = int(datetime.fromisoformat(tag_info.expiration_date.isoformat()).timestamp())
     blob = ConsumableRFIDUtilities.create_buffer_blob(
         tag_uid=tag_uid,
