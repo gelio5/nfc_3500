@@ -85,7 +85,7 @@ const saveBinary = (type) => {
     let data = document.getElementById(type + '_result').innerText;
     encoder = new TextEncoder();
     data = encoder.encode(data);
-    buffer = new ArrayBuffer(data.length + data.length % 4);
+    buffer = new ArrayBuffer(data.length + (4 - data.length % 4));
     let export_data = new Uint8Array(buffer);
     export_data.set(data);
     const blob = new Blob([export_data], {type: 'text/bin'});
