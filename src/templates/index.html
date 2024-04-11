@@ -18,34 +18,32 @@
     <h3 class="h3">Анодный буфер</h3>
     <div class="container d-flex mx-auto">
         <div class="container">
-            <label for="Tag_UID" class="form-label">Tag UID</label>
-            <input type="text" id="Tag_UID" class="form-control" aria-describedby="tagUidHelpBlock">
-            <div id="tagUidHelpBlock" class="form-text">
+            <label for="abc_Tag_UID" class="form-label">Tag UID</label>
+            <input type="text" id="abc_Tag_UID" class="form-control" aria-describedby="abc_tagUidHelpBlock">
+            <div id="abc_tagUidHelpBlock" class="form-text">
                 Например: E0:07:80:91:80:23:51:74
             </div>
         </div>
         <div class="container">
-            <label for="part_num" class="form-label">Номер партии</label>
-            <input type="text" id="part_num" class="form-control" aria-describedby="partNumberHelpBlock">
-            <div id="partNumberHelpBlock" class="form-text">
+            <label for="abc_part_num" class="form-label">Номер партии</label>
+            <input type="text" id="abc_part_num" class="form-control" aria-describedby="abc_partNumberHelpBlock">
+            <div id="abc_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
         <div class="container">
-            <label for="lot_num" class="form-label">Серийный номер</label>
-            <input type="text" id="lot_num" class="form-control" aria-describedby="lotNumberHelpBlock">
-            <div id="lotNumberHelpBlock" class="form-text">
+            <label for="abc_lot_num" class="form-label">Серийный номер</label>
+            <input type="text" id="abc_lot_num" class="form-control" aria-describedby="abc_lotNumberHelpBlock">
+            <div id="abc_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
         <div class="container">
-            <label for="expiration_date" class="form-label">Срок годности</label>
-            <input type="date" id="expiration_date" class="form-control">
-            <div id="expirationDateHelpBlock" class="form-text">
-            </div>
+            <label for="abc_expiration_date" class="form-label">Срок годности</label>
+            <input type="date" id="abc_expiration_date" class="form-control">
         </div>
 
-        <button type="button" class="btn btn-primary" onclick=get_anode_buffer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary" onclick=get_anode_buffer_blob()>Generate data</button>
     </div>
     <div class="container p-4 mx-auto">
         <div class="card">
@@ -53,7 +51,14 @@
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
                 <p id="abc_result" class="card-text"></p>
                 <div class="container">
-                    <button class="btn btn-success btn-sm" onclick=CopyBlobToClipboard("abc_result")>Copy to Clipboard</button>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("abc_result")>Copy to
+                            Clipboard
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-sm" onclick=saveBinary("abc")>Download
+                            binary
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,34 +69,32 @@
     <h3 class="h3">Катодный буфер</h3>
     <div class="container d-flex mx-auto">
         <div class="container">
-            <label for="Tag_UID" class="form-label">Tag UID</label>
+            <label for="cbc_Tag_UID" class="form-label">Tag UID</label>
             <input type="text" id="cbc_Tag_UID" class="form-control" aria-describedby="cbc_tagUidHelpBlock">
             <div id="cbc_tagUidHelpBlock" class="form-text">
                 Например: E0:07:80:91:80:23:51:74
             </div>
         </div>
         <div class="container">
-            <label for="part_num" class="form-label">Номер партии</label>
+            <label for="cbc_part_num" class="form-label">Номер партии</label>
             <input type="text" id="cbc_part_num" class="form-control" aria-describedby="cbc_partNumberHelpBlock">
             <div id="cbc_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
         <div class="container">
-            <label for="lot_num" class="form-label">Серийный номер</label>
+            <label for="cbc_lot_num" class="form-label">Серийный номер</label>
             <input type="text" id="cbc_lot_num" class="form-control" aria-describedby="cbc_lotNumberHelpBlock">
             <div id="cbc_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
         <div class="container">
-            <label for="expiration_date" class="form-label">Срок годности</label>
+            <label for="cbc_expiration_date" class="form-label">Срок годности</label>
             <input type="date" id="cbc_expiration_date" class="form-control">
-            <div id="cbc_expirationDateHelpBlock" class="form-text">
-            </div>
         </div>
 
-        <button type="button" class="btn btn-primary" onclick=get_cathode_buffer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary" onclick=get_cathode_buffer_blob()>Generate data</button>
     </div>
     <div class="container p-4 mx-auto">
         <div class="card">
@@ -99,7 +102,15 @@
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
                 <p id="cbc_result" class="card-text"></p>
                 <div class="container">
-                    <button class="btn btn-success btn-sm" onclick=CopyBlobToClipboard("cbc_result")>Copy to Clipboard</button>
+                    <div class="btn-group" role="group">
+                        <button
+                                class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("cbc_result")>
+                            Copy to clipboard
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-sm" onclick=saveBinary("cbc")>Download
+                            binary
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,34 +129,32 @@
             </select>
         </div>
         <div class="container">
-            <label for="Tag_UID" class="form-label">Tag UID</label>
+            <label for="pol_Tag_UID" class="form-label">Tag UID</label>
             <input type="text" id="pol_Tag_UID" class="form-control" aria-describedby="pol_tagUidHelpBlock">
             <div id="pol_tagUidHelpBlock" class="form-text">
                 Например: E0:07:80:91:80:23:51:74
             </div>
         </div>
         <div class="container">
-            <label for="part_num" class="form-label">Номер партии</label>
+            <label for="pol_part_num" class="form-label">Номер партии</label>
             <input type="text" id="pol_part_num" class="form-control" aria-describedby="pol_partNumberHelpBlock">
             <div id="pol_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
         <div class="container">
-            <label for="lot_num" class="form-label">Серийный номер</label>
+            <label for="pol_lot_num" class="form-label">Серийный номер</label>
             <input type="text" id="pol_lot_num" class="form-control" aria-describedby="cbc_lotNumberHelpBlock">
             <div id="pol_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
         <div class="container">
-            <label for="expiration_date" class="form-label">Срок годности</label>
+            <label for="pol_expiration_date" class="form-label">Срок годности</label>
             <input type="date" id="pol_expiration_date" class="form-control">
-            <div id="pol_expirationDateHelpBlock" class="form-text">
-            </div>
         </div>
 
-        <button type="button" class="btn btn-primary" onclick=get_polymer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary" onclick=get_polymer_blob()>Generate data</button>
     </div>
     <div class="container p-4 mx-auto">
         <div class="card">
@@ -153,7 +162,14 @@
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
                 <p id="pol_result" class="card-text"></p>
                 <div class="container">
-                    <button class="btn btn-success btn-sm" onclick=CopyBlobToClipboard("pol_result")>Copy to Clipboard</button>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("pol_result")>Copy to
+                            Clipboard
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-sm" onclick=saveBinary("pol")>Download
+                            binary
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

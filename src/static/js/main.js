@@ -25,10 +25,10 @@ const CopyBlobToClipboard = async (source) => {
     }}
 
 const get_anode_buffer_blob = async () => {
-    let tag_uid = document.getElementById('Tag_UID').value;
-    let part_num = document.getElementById('part_num').value;
-    let lot_num = document.getElementById('lot_num').value;
-    let expiration_date = document.getElementById('expiration_date').value;
+    let tag_uid = document.getElementById('abc_Tag_UID').value;
+    let part_num = document.getElementById('abc_part_num').value;
+    let lot_num = document.getElementById('abc_lot_num').value;
+    let expiration_date = document.getElementById('abc_expiration_date').value;
     let tag_info = {
     "tag_uid": tag_uid,
     "part_number": part_num,
@@ -78,3 +78,26 @@ const get_polymer_blob = async () => {
         document.getElementById("pol_result").innerText = blob;
     }
 };
+
+const saveBinary = (type) => {
+    let tag_uid = document.getElementById(type + '_Tag_UID').value.replace(":", "_");
+    let filename = tag_uid + "_blob.bin";
+    let data = document.getElementById(type + '_result').innerText;
+    encoder = new TextEncoder();
+    data = encoder.encode(data);
+    buffer = new ArrayBuffer(data.length + data.length % 4);
+    let export_data = new Uint8Array(buffer);
+    export_data.set(data);
+    const blob = new Blob([export_data], {type: 'text/bin'});
+    if(window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else{
+        const elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;
+        document.body.appendChild(elem);
+        elem.click();
+        document.body.removeChild(elem);
+    }
+}
