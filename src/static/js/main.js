@@ -79,6 +79,25 @@ const get_polymer_blob = async () => {
     }
 };
 
+const get_conditioner_blob = async () => {
+    let polymer_type = "Conditioner";
+    let tag_uid = document.getElementById('cond_Tag_UID').value;
+    let part_num = document.getElementById('cond_part_num').value;
+    let lot_num = document.getElementById('cond_lot_num').value;
+    let expiration_date = document.getElementById('cond_expiration_date').value;
+    let tag_info = {
+    "polymer_type": polymer_type,
+    "tag_uid": tag_uid,
+    "part_number": part_num,
+    "lot_number": lot_num,
+    "expiration_date": expiration_date}
+    console.log(tag_info);
+    let blob = await get_blob("/rfid/polymer_blob", tag_info);
+    if (blob){
+        document.getElementById("cond_result").innerText = blob;
+    }
+};
+
 const saveBinary = (type) => {
     let tag_uid = document.getElementById(type + '_Tag_UID').value.replace(":", "_");
     let filename = tag_uid + "_blob.bin";

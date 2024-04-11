@@ -11,45 +11,45 @@
 
 </head>
 <body>
-<h1 class="text-center h1">Генератор информации для записи в RFID метку</h1>
+<h2 class="text-center h2">Генератор информации для записи в RFID метку</h2>
 
 
-<div class="container p-3">
+<div class="container mt-2">
     <h3 class="h3">Анодный буфер</h3>
     <div class="container d-flex mx-auto">
-        <div class="container">
+        <div class="container col-3">
             <label for="abc_Tag_UID" class="form-label">Tag UID</label>
             <input type="text" id="abc_Tag_UID" class="form-control" aria-describedby="abc_tagUidHelpBlock">
             <div id="abc_tagUidHelpBlock" class="form-text">
                 Например: E0 07 80 91 80 23 51 74
             </div>
         </div>
-        <div class="container">
+        <div class="container col-3">
             <label for="abc_part_num" class="form-label">Номер партии</label>
             <input type="text" id="abc_part_num" class="form-control" aria-describedby="abc_partNumberHelpBlock">
             <div id="abc_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
-        <div class="container">
+        <div class="container col-3">
             <label for="abc_lot_num" class="form-label">Серийный номер</label>
             <input type="text" id="abc_lot_num" class="form-control" aria-describedby="abc_lotNumberHelpBlock">
             <div id="abc_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
-        <div class="container">
+        <div class="container col-2">
             <label for="abc_expiration_date" class="form-label">Срок годности</label>
             <input type="date" id="abc_expiration_date" class="form-control">
         </div>
 
-        <button type="button" class="btn btn-outline-primary" onclick=get_anode_buffer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary col-1" onclick=get_anode_buffer_blob()>Generate data</button>
     </div>
-    <div class="container p-4 mx-auto">
+    <div class="container mt-2 mx-auto col-12">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
-                <p id="abc_result" class="card-text"></p>
+                <p id="abc_result" class="card-text" style="height: 24px"></p>
                 <div class="container">
                     <div class="btn-group" role="group">
                         <button class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("abc_result")>Copy to
@@ -65,42 +65,42 @@
     </div>
 </div>
 
-<div class="container p-3">
+<div class="container mt-2">
     <h3 class="h3">Катодный буфер</h3>
     <div class="container d-flex mx-auto">
-        <div class="container">
+        <div class="container col-3">
             <label for="cbc_Tag_UID" class="form-label">Tag UID</label>
             <input type="text" id="cbc_Tag_UID" class="form-control" aria-describedby="cbc_tagUidHelpBlock">
             <div id="cbc_tagUidHelpBlock" class="form-text">
                 Например: E0 07 80 91 80 23 51 74
             </div>
         </div>
-        <div class="container">
+        <div class="container col-3">
             <label for="cbc_part_num" class="form-label">Номер партии</label>
             <input type="text" id="cbc_part_num" class="form-control" aria-describedby="cbc_partNumberHelpBlock">
             <div id="cbc_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
-        <div class="container">
+        <div class="container col-3">
             <label for="cbc_lot_num" class="form-label">Серийный номер</label>
             <input type="text" id="cbc_lot_num" class="form-control" aria-describedby="cbc_lotNumberHelpBlock">
             <div id="cbc_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
-        <div class="container">
+        <div class="container col-2">
             <label for="cbc_expiration_date" class="form-label">Срок годности</label>
             <input type="date" id="cbc_expiration_date" class="form-control">
         </div>
 
-        <button type="button" class="btn btn-outline-primary" onclick=get_cathode_buffer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary col-1" onclick=get_cathode_buffer_blob()>Generate data</button>
     </div>
-    <div class="container p-4 mx-auto">
+    <div class="container mt-2 mx-auto col-12">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
-                <p id="cbc_result" class="card-text"></p>
+                <p id="cbc_result" class="card-text" style="height: 24px"></p>
                 <div class="container">
                     <div class="btn-group" role="group">
                         <button
@@ -116,10 +116,62 @@
         </div>
     </div>
 </div>
-<div class="container p-3">
+
+<div class="container mt-2">
+    <h3 class="h3">Кондиционер</h3>
+    <div class="container d-flex mx-auto">
+        <div class="container col-3">
+            <label for="cond_Tag_UID" class="form-label">Tag UID</label>
+            <input type="text" id="cond_Tag_UID" class="form-control" aria-describedby="cond_tagUidHelpBlock">
+            <div id="cond_tagUidHelpBlock" class="form-text">
+                Например: E0 07 80 91 80 23 51 74
+            </div>
+        </div>
+        <div class="container col-3">
+            <label for="cond_part_num" class="form-label">Номер партии</label>
+            <input type="text" id="cond_part_num" class="form-control" aria-describedby="cond_partNumberHelpBlock">
+            <div id="cond_partNumberHelpBlock" class="form-text">
+                Например: 3751713
+            </div>
+        </div>
+        <div class="container col-3">
+            <label for="cond_lot_num" class="form-label">Серийный номер</label>
+            <input type="text" id="cond_lot_num" class="form-control" aria-describedby="cond_lotNumberHelpBlock">
+            <div id="cond_lotNumberHelpBlock" class="form-text">
+                Например: 0080623
+            </div>
+        </div>
+        <div class="container col-2">
+            <label for="cond_expiration_date" class="form-label">Срок годности</label>
+            <input type="date" id="cond_expiration_date" class="form-control">
+        </div>
+
+        <button type="button" class="btn btn-outline-primary col-1" onclick=get_conditioner_blob()>Generate data</button>
+    </div>
+    <div class="container mt-2 mx-auto col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Данные для записи в RFID метку:</h5>
+                <p id="cond_result" class="card-text" style="height: 24px"></p>
+                <div class="container">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("cond_result")>Copy to
+                            Clipboard
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-sm" onclick=saveBinary("cond")>Download
+                            binary
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-2">
     <h3 class="h3">Полимер</h3>
     <div class="container d-flex mx-auto">
-        <div class="container">
+        <div class="container col-2">
             <label for="polymer_type" class="form-label">Тип полимера</label>
             <select class="form-select" aria-label="Тип полимера" id="polymer_type">
                 <option selected>Выбрать</option>
@@ -128,39 +180,39 @@
                 <option value="POP7">POP7</option>
             </select>
         </div>
-        <div class="container">
+        <div class="container col-3">
             <label for="pol_Tag_UID" class="form-label">Tag UID</label>
             <input type="text" id="pol_Tag_UID" class="form-control" aria-describedby="pol_tagUidHelpBlock">
             <div id="pol_tagUidHelpBlock" class="form-text">
                 Например: E0 07 80 91 80 23 51 74
             </div>
         </div>
-        <div class="container">
+        <div class="container col-2">
             <label for="pol_part_num" class="form-label">Номер партии</label>
             <input type="text" id="pol_part_num" class="form-control" aria-describedby="pol_partNumberHelpBlock">
             <div id="pol_partNumberHelpBlock" class="form-text">
                 Например: 3751713
             </div>
         </div>
-        <div class="container">
+        <div class="container col-2">
             <label for="pol_lot_num" class="form-label">Серийный номер</label>
             <input type="text" id="pol_lot_num" class="form-control" aria-describedby="cbc_lotNumberHelpBlock">
             <div id="pol_lotNumberHelpBlock" class="form-text">
                 Например: 0080623
             </div>
         </div>
-        <div class="container">
+        <div class="container col-2">
             <label for="pol_expiration_date" class="form-label">Срок годности</label>
             <input type="date" id="pol_expiration_date" class="form-control">
         </div>
 
-        <button type="button" class="btn btn-outline-primary" onclick=get_polymer_blob()>Generate data</button>
+        <button type="button" class="btn btn-outline-primary col-1" onclick=get_polymer_blob()>Generate data</button>
     </div>
-    <div class="container p-4 mx-auto">
+    <div class="container mt-2 mx-auto col-12">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Данные для записи в RFID метку:</h5>
-                <p id="pol_result" class="card-text"></p>
+                <p id="pol_result" class="card-text" style="height: 24px"></p>
                 <div class="container">
                     <div class="btn-group" role="group">
                         <button class="btn btn-outline-success btn-sm" onclick=CopyBlobToClipboard("pol_result")>Copy to
@@ -175,6 +227,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
