@@ -65,6 +65,47 @@ async def generate_polymer_blob(tag_info: PolymerTagInfo):
     return blob
 
 
+@rfid.post("/inf_polymer_blob")
+async def generate_polymer_blob(tag_info: PolymerTagInfo):
+    tag_uid = "".join(tag_info.tag_uid.split())
+    expiration_date = int(datetime.fromisoformat(tag_info.expiration_date.isoformat()).timestamp())
+    if tag_info.polymer_type == "Conditioner":
+        blob = ConsumableRFIDUtilities.create_polymer_blob(
+            tag_uid=tag_uid,
+            polymer_type=tag_info.polymer_type,
+            part_num=tag_info.part_number,
+            lot_num=tag_info.lot_number,
+            expiration_date=expiration_date,
+            installation_date=0,
+            life_on_instrument=1209600,
+            runs_allowed=1,
+            samples_allowed=9999,
+            runs_remaining=1,
+            samples_remaining=9999,
+            bubble_wizard_executions=0,
+            array_fill_executions=0,
+            micro_liters_remaining=6000,
+        )
+    else:
+        blob = ConsumableRFIDUtilities.create_polymer_blob(
+            tag_uid=tag_uid,
+            polymer_type=tag_info.polymer_type,
+            part_num=tag_info.part_number,
+            lot_num=tag_info.lot_number,
+            expiration_date=expiration_date,
+            installation_date=0,
+            life_on_instrument=1209600,
+            runs_allowed=0,
+            samples_allowed=9999,
+            runs_remaining=0,
+            samples_remaining=9999,
+            bubble_wizard_executions=0,
+            array_fill_executions=0,
+            micro_liters_remaining=6000,
+        )
+    return blob
+
+
 @rfid.post("/anode_buffer_blob")
 async def generate_anode_buffer_blob(tag_info: BufferTagInfo):
     tag_uid = "".join(tag_info.tag_uid.split())
